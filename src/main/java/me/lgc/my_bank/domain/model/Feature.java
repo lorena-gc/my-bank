@@ -1,0 +1,7 @@
+package me.lgc.my_bank.domain.model;
+
+import jakarta.persistence.Entity;
+
+@Entity(name = "tb_feature")
+public class Feature extends BaseItem{
+}
