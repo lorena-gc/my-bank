@@ -1,6 +1,5 @@
 package me.lgc.my_bank.controller;
 
-import me.lgc.my_bank.domain.model.Client;
 import me.lgc.my_bank.record.ClientRecord;
 import me.lgc.my_bank.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
