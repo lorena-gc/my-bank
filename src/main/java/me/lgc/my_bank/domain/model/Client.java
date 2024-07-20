@@ -29,4 +29,16 @@ public class Client {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<New> newList;
+
+    public Client(Long id, String name, Account account, List<Feature> featureList, List<Card> cardList, List<New> newList) {
+        this.id = id;
+        this.name = name;
+        this.account = account;
+        this.featureList = featureList;
+        this.cardList = cardList;
+        this.newList = newList;
+    }
+
+    public Client(){
+    }
 }

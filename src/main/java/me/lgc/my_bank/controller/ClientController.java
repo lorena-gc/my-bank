@@ -18,15 +18,16 @@ public class ClientController {
     @Autowired
     ClientService clientService;
     @PostMapping
-    public ResponseEntity create(@RequestBody ClientRecord newClient){
-        var client = clientService.create(newClient);
+    public ResponseEntity<String> create(@RequestBody ClientRecord newClient) {
+        var clientId = clientService.create(newClient);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(client.account().getId())
+                .buildAndExpand(clientId)
                 .toUri();
-        return ResponseEntity.created(location).body(client);
+        return ResponseEntity.created(location).body("ClientID: " + clientId);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<ClientRecord> findById(@PathVariable Long id){

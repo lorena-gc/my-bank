@@ -5,11 +5,8 @@ import me.lgc.my_bank.domain.repository.ClientRepository;
 import me.lgc.my_bank.record.ClientRecord;
 import me.lgc.my_bank.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -33,7 +30,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public ClientRecord create(ClientRecord clientToCreate) {
+    public Long create(ClientRecord clientToCreate) {
         if (clientRepository.existsByAccountNumber(clientToCreate.account().getNumber())){
             throw new IllegalArgumentException("This Account Number already exists.");
         }
@@ -45,7 +42,7 @@ public class ClientServiceImpl implements ClientService {
                 .newList(clientToCreate.newList())
                 .build());
 
-        return clientToCreate;
+        return client.getId();
     }
 
     @Override

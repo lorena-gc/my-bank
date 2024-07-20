@@ -9,7 +9,7 @@ public interface ClientService {
 
     ClientRecord findById(Long id);
 
-    ClientRecord create(ClientRecord clientToCreate);
+    Long create(ClientRecord clientToCreate);
 
     List<ClientRecord> findAll();
 }
