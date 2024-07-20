@@ -43,7 +43,7 @@ classDiagram
 ```
 
 ## Main Technologies
-- Java 21
+- Java 17
 - Spring Boot 3
 - Gradle
 - Spring Data JPA
