@@ -1,10 +1,15 @@
 package me.lgc.my_bank.service;
 
 import me.lgc.my_bank.domain.model.Client;
+import me.lgc.my_bank.record.ClientRecord;
+
+import java.util.List;
 
 public interface ClientService {
 
-    Client findById(Long id);
+    ClientRecord findById(Long id);
 
-    Client create(Client clientToCreate);
+    ClientRecord create(ClientRecord clientToCreate);
+
+    List<ClientRecord> findAll();
 }
