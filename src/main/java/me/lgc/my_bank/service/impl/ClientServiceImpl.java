@@ -1,7 +1,10 @@
 package me.lgc.my_bank.service.impl;
 
+import me.lgc.my_bank.domain.model.Account;
+import me.lgc.my_bank.domain.model.Card;
 import me.lgc.my_bank.domain.model.Client;
 import me.lgc.my_bank.domain.repository.ClientRepository;
+import me.lgc.my_bank.record.ClientInputRecord;
 import me.lgc.my_bank.record.ClientRecord;
 import me.lgc.my_bank.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +33,24 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Long create(ClientRecord clientToCreate) {
-        if (clientRepository.existsByAccountNumber(clientToCreate.account().getNumber())){
+    public Long create(ClientInputRecord clientToCreate) {
+        if (clientRepository.existsByAccountNumber(clientToCreate.account().number())){
             throw new IllegalArgumentException("This Account Number already exists.");
         }
+        var account = Account.builder()
+                .number(clientToCreate.account().number())
+                .agency(clientToCreate.account().agency())
+                .limit(clientToCreate.account().limit())
+                .build();
+        var cardList = clientToCreate.cardList().stream().toList();
+
+        var cards = cardList.stream().map(card -> Card.builder().number(card.number()).limit(card.limit()).build()).toList();
+
         var client =  clientRepository.save(Client.builder()
                 .name(clientToCreate.name())
-                .account(clientToCreate.account())
+                .account(account)
                 .featureList(clientToCreate.featureList())
-                .cardList(clientToCreate.cardList())
+                .cardList(cards)
                 .newList(clientToCreate.newList())
                 .build());
 

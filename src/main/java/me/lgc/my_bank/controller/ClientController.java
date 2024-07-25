@@ -1,5 +1,6 @@
 package me.lgc.my_bank.controller;
 
+import me.lgc.my_bank.record.ClientInputRecord;
 import me.lgc.my_bank.record.ClientRecord;
 import me.lgc.my_bank.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class ClientController {
     @Autowired
     ClientService clientService;
     @PostMapping
-    public ResponseEntity<String> create(@RequestBody ClientRecord newClient) {
+    public ResponseEntity<String> create(@RequestBody ClientInputRecord newClient) {
         var clientId = clientService.create(newClient);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
